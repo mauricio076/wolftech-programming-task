@@ -20,13 +20,29 @@ import {
     faPlusSquare,
     fas
 } from '@fortawesome/free-solid-svg-icons'
+import CardFooter from "reactstrap/es/CardFooter";
 
 
 library.add(faCheckSquare, faChevronDown, faChevronRight, faPlusSquare, faGripLinesVertical, fas)
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selected: checked
+        };
+
+        this.setSelected = this.setSelected.bind(this)
+    }
+
+    setSelected(checked) {
+        this.setState({selected: checked});
+    }
 
     render() {
+
+        const {selected} = this.state;
+
         return (
             <div className="App">
                 <header className="App-header">
@@ -34,11 +50,12 @@ class App extends Component {
                     <p></p>
                     <Card className="bg-dark">
                         <CardBody>
-                            <DepartmentSelector Departments={departments} Checked={checked}/>
+                            <DepartmentSelector Departments={departments} Checked={checked}
+                                                SetSelected={this.setSelected}/>
                         </CardBody>
+                        <CardFooter>Results: [{selected.toString()}]</CardFooter>
                     </Card>
                 </header>
-                <footer className="App-footer">Created with:</footer>
             </div>
         );
     }

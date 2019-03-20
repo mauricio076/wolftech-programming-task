@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import CheckboxTree from 'react-checkbox-tree';
 
@@ -26,6 +26,7 @@ class DepartmentSelector extends Component {
     onCheck(checked) {
         this.setState({checked});
         this.countSelected(this.state.nodes, checked);
+        this.props.SetSelected(checked);
     }
 
     onExpand(expanded) {
@@ -137,6 +138,7 @@ class DepartmentSelector extends Component {
                     parentOpen: <FontAwesomeIcon className="rct-icon rct-icon-parent-open" icon="folder-open"/>,
                     leaf: <FontAwesomeIcon className="rct-icon rct-icon-leaf-close" icon="file"/>
                 }}
+                onlyLeafCheckboxes
                 checked={checked}
                 expanded={expanded}
                 nodes={nodes}
